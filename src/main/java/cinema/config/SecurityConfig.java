@@ -28,7 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/register").permitAll()
+                .antMatchers(HttpMethod.POST, "/register")
+                .permitAll()
                 .antMatchers(HttpMethod.GET, "/cinema-halls", "/movies",
                         "/movie-sessions/available")
                 .hasAnyRole(Role.RoleName.USER.name(), Role.RoleName.ADMIN.name())
@@ -40,10 +41,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasRole(Role.RoleName.ADMIN.name())
                 .antMatchers(HttpMethod.GET, "/orders", "/shopping-carts/by-user")
                 .hasRole(Role.RoleName.USER.name())
-                .antMatchers(HttpMethod.POST, "/orders/complete").hasRole(Role.RoleName.USER.name())
+                .antMatchers(HttpMethod.POST, "/orders/complete")
+                .hasRole(Role.RoleName.USER.name())
                 .antMatchers(HttpMethod.PUT, "/shopping-carts/movie-sessions")
                 .hasRole(Role.RoleName.USER.name())
-                .antMatchers(HttpMethod.GET, "/users/by-email").hasRole(Role.RoleName.ADMIN.name())
+                .antMatchers(HttpMethod.GET, "/users/by-email")
+                .hasRole(Role.RoleName.ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
